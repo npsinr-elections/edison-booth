@@ -1,0 +1,39 @@
+{
+  "name": "edison-booth",
+  "version": "1.0.0",
+  "description": "Poll booth for the voters.",
+  "main": "build/main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/opn": "^5.1.0",
+    "browserify": "^16.1.1",
+    "gulp": "^4.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-typescript": "^4.0.1",
+    "gulp-uglify": "^3.0.0",
+    "tsify": "^3.0.4",
+    "tslint": "^5.9.1",
+    "tslint-eslint-rules": "^5.1.0",
+    "typescript": "^2.7.2",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/npsinr-elections/edison-booth.git"
+  },
+  "keywords": [
+    "NPS",
+    "INR",
+    "elections"
+  ],
+  "author": "npsinr-elections",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/npsinr-elections/edison-booth/issues"
+  },
+  "homepage": "https://github.com/npsinr-elections/edison-booth#readme"
+}
