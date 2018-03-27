@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Poll booth for the voters.",
   "main": "build/main.js",
-  "dependencies": {},
+  "dependencies": {
+    "opn": "^5.3.0"
+  },
   "devDependencies": {
     "@types/opn": "^5.1.0",
     "browserify": "^16.1.1",
