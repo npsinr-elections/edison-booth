@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Poll booth for the voters.",
   "main": "build/main.js",
+  "bin": "build/main.js",
   "dependencies": {
     "bootstrap": "^4.1.1",
     "express": "^4.16.3",
