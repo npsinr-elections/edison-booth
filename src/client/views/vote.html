@@ -1,12 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<script>
+function validateForm() {
+    var radios = document.getElementsByName("optradio");
+    var formValid = false;
+	var vote;
+    var i = 0;
+    while (!formValid && i < radios.length) {
+        if (radios[i].checked) 
+		{formValid = true;
+		vote=i;
+		}
+        i++;        
+    }
+	document.getElementById("VOTE").innerHTML = vote;
+    if (!formValid) alert("Must check some option!");
+    return formValid;
+}
+</script>
+
 <body>
-<h1>Choose your candidate</h1>
-<input type="radio" value="Candidate A">Candidate A<br>
-  <input type="radio"  value="Candidate B"> Candidate B<br>
-  <input type="radio"  value="Candidate C">Candidate C<br>
-  <br>
-  <form action="/thankyou"><input type=submit value="Submit"></form>
+<div class="container">
+<p id='office'></p>
+<div class="row">
+  <div class="col-sm-4"><img src="" class="img-rounded" width="304" height="236"></div>
+  <div class="col-sm-4"><img src="" class="img-rounded" width="304" height="236"></div>
+  <div class="col-sm-4"><img src="" class="img-rounded" width="304" height="236"></div>
+</div>
+<div class="row">
+<form name="myForm" action="" onsubmit="return validateForm()" method="post">
+  <div class="col-sm-4"><label class="radio-inline"><input type="radio" name="optradio"><p id=0></p></label></div>
+  <div class="col-sm-4"><label class="radio-inline"><input type="radio" name="optradio"><p id=1></label></div>
+  <div class="col-sm-4"><label class="radio-inline"><input type="radio" name="optradio"><p id=2></label></div> 
+<input type="">
+{% names['prefect'][1]%}
+</form>
+<p id="VOTE"></p>
+</div>
+</div>
+
+<script>
+var Candidates = ["XYZ", "XWY", "PQR", "THR", "YOU"];
+document.getElementById('office').innerHTML = "Prefect";
+for (i = 0; i < Candidates.length; i++) 
+{ 
+    document.getElementById(i).innerHTML = Candidates[i];
+};
+</script>
 </body>
 </html>
