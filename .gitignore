@@ -60,3 +60,18 @@ typings/
 # Build files
 build
 
+# Generated executables
+dist
+
+# Project Documentation
+docs
+
+# Emacs autosave files
+\#*\#
+.\#*
+
+# VS Code settings
+.vscode
+
+# Ignore bundles js files in assets, but not js libraries
+src/client/assets/scripts/*.bundle.js
