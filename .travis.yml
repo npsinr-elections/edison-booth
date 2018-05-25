@@ -11,6 +11,6 @@ script:
   - npm run lint
   - npm run build
   - npm run dist
-  - ./dist/edison-central-linux &
+  - ./dist/edison-booth-linux &
   - sleep 3
   - npm test
