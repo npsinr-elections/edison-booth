@@ -9,9 +9,9 @@ import { config } from "../config";
 import { router as mainRouter } from "./routes/mainRouter";
 
 export const app = express();
-var votes=0;
-var check=0;
 var json=require("./candidatelist.json");
+var numvotes;
+var check=1;
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("tiny"));
@@ -49,13 +49,15 @@ export function runServer(callBack: () => void): void {
 
   callBack();
 }
+countVotes("Challengers Vice Captain","Superman");
+checkVotes("Challengers Vice Captain");
 function countVotes(office:string,candidates:string){
   for (var i=0;i<json.polls.length;i++){
     if (json.polls[i].name==office){
       for (var j=0;j<json.polls[i].candidates.length;j++){
         if (json.polls[i].candidates[j].name==candidates){
           json.polls[i].candidates[j].votes+=1;
-          votes=json.polls[i].candidates[j].votes;
+          numvotes=json.polls[i].candidates[j].votes;
         }
       }
     }
