@@ -9,9 +9,6 @@ import { config } from "../config";
 import { router as mainRouter } from "./routes/mainRouter";
 
 export const app = express();
-var json=require("./candidatelist.json");
-var numvotes;
-var check=1;
 
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("tiny"));
@@ -44,37 +41,6 @@ app.use("/images", express.static(config.database.images));
 app.use("/", mainRouter);
 
 export function runServer(callBack: () => void): void {
-
-  app.listen(3000, () => console.log("Listening on port 3000!"));
-
+  app.listen(config.port, () => console.log("Listening on port 3000!"));
   callBack();
 }
-countVotes("Challengers Vice Captain","Superman");
-checkVotes("Challengers Vice Captain");
-function countVotes(office:string,candidates:string){
-  for (var i=0;i<json.polls.length;i++){
-    if (json.polls[i].name==office){
-      for (var j=0;j<json.polls[i].candidates.length;j++){
-        if (json.polls[i].candidates[j].name==candidates){
-          json.polls[i].candidates[j].votes+=1;
-          numvotes=json.polls[i].candidates[j].votes;
-        }
-      }
-    }
-  }
-  }
-function checkVotes(office:string){
-  for (var i=0;i<json.polls.length;i++){
-    if (json.polls[i].name==office){
-      var max_votes=json.polls[i].candidates[0].votes;
-      for (var j=0;j<json.polls[i].candidates.length;j++){
-        if (json.polls[i].candidates[j].votes>max_votes){
-          max_votes=json.polls[i].candidates[j].votes;
-          }}
-      for (var k=0;k<json.polls[i].candidates.length;k++){
-        if (json.polls[i].candidates[j].votes==max_votes){
-          check=1;
-            }
-        }
-      }
-    }}
