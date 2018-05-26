@@ -12,7 +12,7 @@ const APPDATA = path.join(
   || (
     process.platform === "darwin" ?
       path.join(process.env.HOME, "Library/Preferences") :
-      process.env.HOME), ".edison"
+      process.env.HOME), ".edison-booth"
 );
 
 interface Config {
@@ -35,7 +35,7 @@ interface Config {
 export const config: Readonly<Config> = {
   appName: "edison-booth",
   devMode: process.env.NODE_ENV === "development",
-  port: process.env.PORT || "3000",
+  port: process.env.PORT || "5000",
   static: {
     views: path.join(__dirname, "client", "views"),
     assets: path.join(__dirname, "client", "assets"),
