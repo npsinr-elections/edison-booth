@@ -1,60 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+  <head>
 
-<script>
-function validateForm() {
-    var radios = document.getElementsByName("optradio");
-    var formValid = false;
-	var vote;
-    var i = 0;
-    while (!formValid && i < radios.length) {
-        if (radios[i].checked) 
-		{formValid = true;
-		vote=i;
-		}
-        i++;        
-    }
-	document.getElementById("VOTE").innerHTML = vote;
-    if (!formValid) alert("Must check some option!");
-    return formValid;
-}
-</script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-<body>
-<div class="container">
-<p id='office'></p>
-<div class="row">
-  <div class="col-sm-4"><img src="" class="img-rounded" width="304" height="236"></div>
-  <div class="col-sm-4"><img src="" class="img-rounded" width="304" height="236"></div>
-  <div class="col-sm-4"><img src="" class="img-rounded" width="304" height="236"></div>
-</div>
-<div class="row">
-<form name="myForm" action="" onsubmit="return validateForm()" method="post">
-  <div class="col-sm-4"><label class="radio-inline"><input type="radio" name="optradio"><p id=0></p></label></div>
-  <div class="col-sm-4"><label class="radio-inline"><input type="radio" name="optradio"><p id=1></label></div>
-  <div class="col-sm-4"><label class="radio-inline"><input type="radio" name="optradio"><p id=2></label></div> 
-<input type="">
-{% names['prefect'][1]%}
-</form>
-<p id="VOTE"></p>
-</div>
-</div>
+    <title>Edison</title>
 
-<script>
-var Candidates = ["XYZ", "XWY", "PQR", "THR", "YOU"];
-document.getElementById('office').innerHTML = "Prefect";
-for (i = 0; i < Candidates.length; i++) 
-{ 
-    document.getElementById(i).innerHTML = Candidates[i];
-};
-</script>
-</body>
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/styles/libraries/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="../assets/styles/results.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">Elections NPS Indiranagar</a>
+      </div>
+    </nav>
+
+    <header>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+		  <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+          <!-- Slide 1 - Set the background image for this slide in the line below -->
+          <div class="carousel-item active" style="background-color:white">
+            <div class="carousel-caption d-none d-md-block">
+              <h3 style="color: black">Prefect</h3>
+            </div>
+          </div>
+          <!-- Slide 2 - Set the background image for this slide in the line below -->
+          <div class="carousel-item" style="background-color:white">
+            <div class="carousel-caption d-none d-md-block">
+              <h3 style="color: black">Vice Prefect 1</h3>
+            </div>
+          </div>
+		  <div class="carousel-item" style="background-color:white">
+            <div class="carousel-caption d-none d-md-block">
+              <h3 style="color: black">Vice Prefect 2</h3>
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    </header>
+    <!-- Bootstrap core JavaScript -->
+    <script src="../assets/scripts/libraries/jquery-3.3.1.min.js"></script>
+    <script src="../assets/scripts/libraries/bootstrap.min.js"></script>
+
+  </body>
 </html>
