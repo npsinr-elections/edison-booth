@@ -4,7 +4,9 @@ import express = require("express");
 import session = require("express-session");
 import morgan = require("morgan");
 import nunjucks = require("nunjucks");
+
 import { config } from "../config";
+import { router as mainRouter } from "./routes/mainRouter";
 
 export const app = express();
 
@@ -16,12 +18,12 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   secret: crypto.randomBytes(64).toString("hex"),
-  }));
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
-  }));
+}));
 
 app.set("views", config.views);
 
@@ -29,18 +31,18 @@ nunjucks.configure(app.get("views"), {
   autoescape: true,
   noCache: true,
   express: app
-  });
+});
 
 app.use("/assets", express.static(config.assets));
 app.use("/images", express.static(config.database.images));
 app.use("/assets", express.static(config.assets));
 app.use("/images", express.static(config.database.images));
 
-export function runServer() {
+app.use("/", mainRouter);
 
-  app.get("/", (_1, res) => res.render("welcome.html"));
-  app.get("/vote", (_1, res) => res.render("vote.html"));
-  app.get("/thankyou", (_1, res) => res.render("thankyou.html"));
+export function runServer(callBack: () => void): void {
+
   app.listen(3000, () => console.log("Listening on port 3000!"));
 
+  callBack();
 }
