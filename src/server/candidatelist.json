@@ -1,0 +1,15 @@
+{
+    "polls":[{
+        "name":"Challengers Vice Captain",
+        "foreColor":"#FFF",
+        "backColor":"#F00",
+        "candidates":[
+            {
+                "name":"Superman",
+                "votes":100,
+                "imageURL":"path/to/picture.jpg"
+            }
+        ]
+    }
+]
+}
