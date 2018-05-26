@@ -6,7 +6,7 @@ import morgan = require("morgan");
 import nunjucks = require("nunjucks");
 
 import { config } from "../config";
-import { router as mainRouter } from "./routes/mainRouter";
+import { router as voteRouter } from "./routes/voteRouter";
 
 export const app = express();
 
@@ -25,7 +25,7 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-app.set("views", config.views);
+app.set("views", config.static.views);
 
 nunjucks.configure(app.get("views"), {
   autoescape: true,
@@ -33,14 +33,14 @@ nunjucks.configure(app.get("views"), {
   express: app
 });
 
-app.use("/assets", express.static(config.assets));
-app.use("/images", express.static(config.database.images));
-app.use("/assets", express.static(config.assets));
+app.use("/assets", express.static(config.static.assets));
 app.use("/images", express.static(config.database.images));
 
-app.use("/", mainRouter);
+app.use("/", voteRouter);
 
 export function runServer(callBack: () => void): void {
-  app.listen(config.port, () => console.log("Listening on port 3000!"));
+  app.listen(
+    config.port, () => console.log(`Listening on port ${config.port}!`)
+  );
   callBack();
 }
