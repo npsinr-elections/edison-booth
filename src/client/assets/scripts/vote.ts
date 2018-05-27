@@ -41,7 +41,6 @@ $(() => {
   const keys = "abcdefghjiklmnopqrstuvwxyz";
   const keyCode = $("#key-code");
   const lockDiv = $("#lock");
-  const form = $("#carousel-container");
 
   let unlockKey = "";
   let locked = true;
@@ -233,7 +232,7 @@ $(() => {
     extendArray(votes, numPolls);
 
     for (let i = 0; i < numPolls; ++i) {
-      $(`#selected-candidate-${i}`).text("No candidate chosen.");
+      selectedCandidateTds.text("No candidate chosen.");
     }
 
     lock();
