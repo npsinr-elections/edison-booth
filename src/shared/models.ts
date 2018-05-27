@@ -16,7 +16,6 @@ export interface Poll {
   caption: string;
   color: string;
   parentID: string;
-  group: string;
   candidates?: Candidate[];
 }
 
