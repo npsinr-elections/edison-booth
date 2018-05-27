@@ -1,0 +1,17 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <a href="/" class="navbar-brand">{{ appName }}</a>
+    <ul class="navbar-nav mr-auto">
+      {% for link, name, faIcon in [
+        ["/home", "Home", "fas fa-home"]
+      ] %}
+      <li class="nav-item">
+        <a href="{{ link }}" class="nav-link {% if currentURL === link %}active{% endif %}">
+          <i class="nav-link-icon {{ faIcon }}"></i>
+          {{ name }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    <span id="lanIP" class="navbar-text">{{ appName }} server @ {{ lanIP }}</span>
+  </nav>
+  
