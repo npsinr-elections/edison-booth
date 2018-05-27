@@ -15,6 +15,45 @@
 
     <!-- Custom styles for this template -->
     <link href="../assets/styles/results.css" rel="stylesheet">
+	
+	<!-- Teacher onkeydown -->
+	<script>
+		document.addEventListener("keydown", formValidate);
+		function formValidate()
+		{
+			var radios1 = document.getElementsByName("Prefect");
+			var formValid1 = false;
+			var i = 0;
+			while (!formValid1 && i < radios1.length) {
+				if (radios1[i].checked) 
+				{formValid1 = true;
+				}
+				i++;        
+			}
+			
+			var radios2 = document.getElementsByName("VicePrefect1");
+			var formValid2 = false;
+			var i = 0;
+			while (!formValid2 && i < radios2.length) {
+				if (radios2[i].checked) 
+				{formValid2 = true;
+				}
+				i++;        
+			}
+			
+			var radios3 = document.getElementsByName("VicePrefect2");
+			var formValid3 = false;
+			var i = 0;
+			while (!formValid3 && i < radios3.length) {
+				if (radios3[i].checked) 
+				{formValid3 = true;
+				}
+				i++;        
+			}
+			if (!formValid1 || !formValid2 || !formValid3) alert("You have not submitted all your votes");
+			return formValid1;
+		}
+	</script>
 
   </head>
 
@@ -28,7 +67,8 @@
     </nav>
 
     <header>
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false">
+	  <form>
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="false" data-wrap="false">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -39,17 +79,78 @@
           <div class="carousel-item active" style="background-color:white">
             <div class="carousel-caption d-none d-md-block">
               <h3 style="color: black">Prefect</h3>
+			  
+			  <div class="container">
+				
+				  <div class="card-deck">
+					<div class="card bg-primary" width="400px">
+					  <div class="card-body text-center">
+						<img class="card-img-top" src="C:\Users\deepa\BootStrap\Aurora.jpg">
+						<input type="radio" name="Prefect">
+						<p class="card-text">Name of Candidate</p>
+					  </div>
+					</div>
+					<div class="card bg-primary" width="400px">
+					  <div class="card-body text-center">
+						<img class="card-img-top" src="C:\Users\deepa\BootStrap\Aurora.jpg">
+						<input type="radio" name="Prefect">
+						<p class="card-text">Name of Candidate</p>
+					  </div>
+					</div>
+				  </div>
+			  </div>
+			  <br><br><br>
             </div>
           </div>
           <!-- Slide 2 - Set the background image for this slide in the line below -->
           <div class="carousel-item" style="background-color:white">
             <div class="carousel-caption d-none d-md-block">
               <h3 style="color: black">Vice Prefect 1</h3>
+			  <div class="container">
+				
+				  <div class="card-deck">
+					<div class="card bg-primary" width="400px">
+					  <div class="card-body text-center">
+						<img class="card-img-top" src="C:\Users\deepa\BootStrap\Aurora.jpg">
+						<input type="radio" name="VicePrefect1">
+						<p class="card-text">Name of Candidate</p>
+					  </div>
+					</div>
+					<div class="card bg-primary" width="400px">
+					  <div class="card-body text-center">
+						<img class="card-img-top" src="C:\Users\deepa\BootStrap\Aurora.jpg">
+						<input type="radio" name="VicePrefect1">
+						<p class="card-text">Name of Candidate</p>
+					  </div>
+					</div>
+				  </div>
+			  </div>
+			  <br><br><br>
             </div>
           </div>
 		  <div class="carousel-item" style="background-color:white">
             <div class="carousel-caption d-none d-md-block">
               <h3 style="color: black">Vice Prefect 2</h3>
+			  <div class="container">
+				
+				  <div class="card-deck">
+					<div class="card bg-primary" width="400px">
+					  <div class="card-body text-center">
+						<img class="card-img-top" src="C:\Users\deepa\BootStrap\Aurora.jpg">
+						<input type="radio" name="VicePrefect2">
+						<p class="card-text">Name of Candidate</p>
+					  </div>
+					</div>
+					<div class="card bg-primary" width="400px">
+					  <div class="card-body text-center">
+						<img class="card-img-top" src="C:\Users\deepa\BootStrap\Aurora.jpg">
+						<input type="radio" name="VicePrefect2">
+						<p class="card-text">Name of Candidate</p>
+					  </div>
+					</div>
+				  </div>
+			  </div>
+			  <br><br><br>
             </div>
           </div>
         </div>
@@ -62,10 +163,12 @@
           <span class="sr-only">Next</span>
         </a>
       </div>
+	  </form>
     </header>
     <!-- Bootstrap core JavaScript -->
     <script src="../assets/scripts/libraries/jquery-3.3.1.min.js"></script>
     <script src="../assets/scripts/libraries/bootstrap.min.js"></script>
+	
 
   </body>
 </html>
