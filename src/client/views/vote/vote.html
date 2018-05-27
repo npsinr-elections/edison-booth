@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edison</title>
+    <title>{{ election.name }}</title>
 
     <link href="/assets/styles/libraries/bootstrap.min.css" rel="stylesheet">
     <link href="/assets/styles/vote.css" rel="stylesheet">
@@ -15,9 +15,9 @@
 
   <body data-poll-number="{{ election.polls.length }}">
     <div id="notification">Your votes have been saved.</div>
-    {% include "lock.html" %}
+    {% include "./lock.html" %}
     
-    {% include "carousel.html" %}
+    {% include "./carousel.html" %}
     
     <script src="/assets/scripts/libraries/jquery-3.3.1.min.js"></script>
     <script src="/assets/scripts/libraries/bootstrap.min.js"></script>
