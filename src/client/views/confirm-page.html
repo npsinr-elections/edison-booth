@@ -1,0 +1,26 @@
+<div class="carousel-item" id="confirm-page" style="background-image: url('{{ election.image }}')">
+  <div id="confirm-text-container" class="mx-auto">
+    <h1>Confirm your votes</h1>
+    <h4 class="text-muted" id="fill-all">Please choose one candidate for every office to submit</h4>
+    <hr>
+    <table class="table table-bordered">
+      <thead class="thead-dark">
+        <th>Poll</th>
+        <th>Candidate</th>
+      </thead>
+      <tbody>
+        {% for index in range(election.polls.length) %}
+        {% set poll = election.polls[index] %}
+        <tr>
+          <td>{{ poll.name }}</td>
+          <td id="selected-candidate-{{ index }}"></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <button class="btn-dark btn-lg" id="submit-button">
+      <i class="fas fa-paper-plane"></i>
+      &nbsp;Submit your votes!
+    </button>
+  </div>
+</div>

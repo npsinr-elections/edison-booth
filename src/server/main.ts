@@ -6,7 +6,7 @@ import morgan = require("morgan");
 import nunjucks = require("nunjucks");
 
 import { config } from "../config";
-import { router as voteRouter } from "./routes/voteRouter";
+import { router as mainRouter } from "./routes/mainRouter";
 
 export const app = express();
 
@@ -36,11 +36,8 @@ nunjucks.configure(app.get("views"), {
 app.use("/assets", express.static(config.static.assets));
 app.use("/images", express.static(config.database.images));
 
-app.use("/", voteRouter);
+app.use("/", mainRouter);
 
 export function runServer(callBack: () => void): void {
-  app.listen(
-    config.port, () => console.log(`Listening on port ${config.port}!`)
-  );
-  callBack();
+  app.listen(config.port, callBack);
 }
