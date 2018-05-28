@@ -13,6 +13,7 @@ export interface Poll {
   type: string;
   name: string;
   caption: string;
+  image?: string;
   color: string;
   parentID: string;
   candidates?: Candidate[];

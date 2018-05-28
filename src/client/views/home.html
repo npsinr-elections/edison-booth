@@ -1,2 +1,30 @@
 {% extends "index.html" %}
 
+{% block mainContent %}
+<div class="import-edit-container col-lg-10 mx-auto">
+  <div class="import-form-container card">
+    <div class="card-header bg-dark">
+      <h3>Import data</h3>
+    </div>
+    <div class="card-body">
+      <form class="import-form" action="/import" id="import-form" method="POST", enctype="multipart/form-data">
+        <div class="form">
+          <label for="import-file-input">Upload exported data from edison-central</label>
+          <input class="form-control-file" type="file" name="importedData" id="import-file-input" accept="application/zip">
+        </div>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-dark">
+            <i class="fas fa-paper-plane"></i>
+            &nbsp;Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{%- endblock %}
+
+{% block stylesheets -%}
+<link rel="stylesheet" href="/assets/styles/forms.css">
+<link rel="stylesheet" href="/assets/styles/forms/import.css">
+{%- endblock %}

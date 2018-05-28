@@ -1,5 +1,5 @@
 import * as zip from "adm-zip";
-import { copyFile, mkdir, unlink } from "fs";
+import { copyFile, mkdir, readdirSync, unlink } from "fs";
 import Datastore = require("nedb");
 import path = require("path");
 import rimraf = require("rimraf");
@@ -7,51 +7,13 @@ import { generate } from "shortid";
 import { promisify } from "util";
 
 import { config } from "../../config";
+import { Candidate, Election, Image, Poll } from "../../shared/models";
 import { dbfind, dbInsert, dbRemove, dbUpdate } from "../utils/database";
 
 const copyFilePromise = promisify(copyFile);
 const mkdirPromise = promisify(mkdir);
 const unlinkPromise = promisify(unlink);
 const rimrafPromise = promisify(rimraf);
-
-export interface Election {
-  id: string;
-  type: string;
-  name: string;
-  caption: string;
-  image: string;
-  color: string;
-  polls?: Poll[];
-}
-
-export interface Poll {
-  id: string;
-  type: string;
-  name: string;
-  image?: string;
-  caption: string;
-  color: string;
-  parentID: string;
-  group: string;
-  candidates?: Candidate[];
-}
-
-export interface Candidate {
-  id: string;
-  type: string;
-  name: string;
-  image: string;
-  votes: number;
-  parentID: string;
-  fallback: string;
-  fallbackName?: string;
-}
-
-export interface Image {
-  id: string;
-  type: string;
-  resourceID: string;
-}
 
 export type Resource = Election | Poll | Candidate | Image;
 
@@ -67,13 +29,27 @@ export function zipElection(
 
 class ElectionsDatastore {
   public db: Datastore;
-  constructor() {
-    this.db = new Datastore({
-      filename: config.database.elections,
-      autoload: true,
-      timestampData: true
+
+  public loadDB(): string {
+    let dbPath: string;
+    readdirSync(config.database.dir).forEach((fileName) => {
+      if (path.extname(fileName) === ".db") {
+        dbPath = path.join(config.database.dir, fileName);
+      }
     });
+
+    if (!dbPath) {
+      return undefined;
+    }
+
+    this.db = new Datastore({
+      filename: dbPath,
+      autoload: true
+    });
+
+    return dbPath;
   }
+
   public async getElections(): Promise<Election[]> {
     const elections: Election[] = await dbfind(this.db, { type: "election" });
     return await Promise.all(elections.map((value) => {
@@ -213,18 +189,22 @@ class ElectionsDatastore {
     return await this.getResourceByID(id);
   }
 
+  public async incrementVotes(candidateID: string) {
+    await dbUpdate(this.db, { id: candidateID }, { $inc: { votes: 1 } }, {});
+  }
+
   public async exportElection(electionID: string, pollIDs: string[]) {
     const { polls, ...exportElection } = await this.getElection(electionID);
     const exportCandidates: Candidate[] = [];
     const exportPolls: Poll[] = polls
-    .filter((poll) => {
-      return pollIDs.indexOf(poll.id) > -1;
-    })
-    .map((poll) => {
-      const { candidates, ...exportPoll } = poll;
-      exportCandidates.push(...candidates);
-      return exportPoll;
-    });
+      .filter((poll) => {
+        return pollIDs.indexOf(poll.id) > -1;
+      })
+      .map((poll) => {
+        const { candidates, ...exportPoll } = poll;
+        exportCandidates.push(...candidates);
+        return exportPoll;
+      });
     const exportResources: NonImageResource[] = [
       exportElection as NonImageResource
     ]
@@ -270,11 +250,11 @@ class ElectionsDatastore {
   }
 
   private async removeFallback(fallback: string) {
-      return await dbUpdate(
-        this.db,
-        { fallback },
-        { $set: {fallback: "_none_"}},
-        {});
+    return await dbUpdate(
+      this.db,
+      { fallback },
+      { $set: { fallback: "_none_" } },
+      {});
   }
 }
 

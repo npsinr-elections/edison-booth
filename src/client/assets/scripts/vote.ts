@@ -135,7 +135,7 @@ $(() => {
   const numSlides = numPolls + 1;
 
   const submitButton = $("#submit-button");
-
+  const fillAll = $("#fill-all");
   candidateBlocks.each((index, block) => {
     const blockElem = $(block);
 
@@ -151,7 +151,7 @@ $(() => {
 
           if (full(votes)) {
             submitButton.css("display", "inline-block");
-            $("#fill-all").css("display", "none");
+            fillAll.css("display", "none");
           }
         }
       });
@@ -216,6 +216,8 @@ $(() => {
   const selectedCandidateTds = $("[id^=\"selected-candidate-\"");
 
   function reset(): void {
+    submitButton.css("display", "none");
+    fillAll.css("display", "block");
     window.setTimeout(() => {
       carousel.removeClass("slide");
       carousel.carousel(0);

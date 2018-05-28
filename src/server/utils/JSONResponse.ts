@@ -62,8 +62,10 @@ interface PresetErrors {
   };
   ResourceError: {
     /** Resource not found */
-    NotFound: Error
+    NotFound: Error;
+    VoteError: Error
   };
+
 }
 
 /**
@@ -113,6 +115,12 @@ export const ERRORS: PresetErrors = {
       code: "pageError.notFound",
       status: 404,
       title: "Resource does not exist",
+      detail: ""
+    },
+    VoteError: {
+      code: "pageError.VoteError",
+      status: 500,
+      title: "Invalid votes",
       detail: ""
     }
   }
