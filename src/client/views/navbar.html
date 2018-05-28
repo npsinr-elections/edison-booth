@@ -2,7 +2,9 @@
     <a href="/" class="navbar-brand">{{ appName }}</a>
     <ul class="navbar-nav mr-auto">
       {% for link, name, faIcon in [
-        ["/home", "Home", "fas fa-home"]
+        ["/", "Home", "fas fa-home"],
+        ["/vote", "Vote", "fas fa-users"],
+        ["/export", "Export", "fas fa-download"]
       ] %}
       <li class="nav-item">
         <a href="{{ link }}" class="nav-link {% if currentURL === link %}active{% endif %}">

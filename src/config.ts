@@ -27,6 +27,7 @@ interface Config {
   database: Readonly<{
     dir: string;
     images: string;
+    users: string;
     temp: string;
     elections: string;
     exportTemp: string;
@@ -44,6 +45,7 @@ export const config: Readonly<Config> = {
   database: {
     dir: APPDATA,
     images: path.join(APPDATA, "images"),
+    users: path.join(APPDATA, "user.json"),
     temp: path.join(APPDATA, "temp"),
     elections: path.join(APPDATA, "data.db"),
     exportTemp: path.join(APPDATA, "export-temp")

@@ -17,6 +17,7 @@ export interface Poll {
   color: string;
   parentID: string;
   candidates?: Candidate[];
+  show?: boolean;
 }
 
 export interface Candidate {

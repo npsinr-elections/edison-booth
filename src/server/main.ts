@@ -7,6 +7,7 @@ import nunjucks = require("nunjucks");
 
 import { config } from "../config";
 import { router as mainRouter } from "./routes/mainRouter";
+import { router as userRouter } from "./routes/userRouter";
 
 export const app = express();
 
@@ -37,6 +38,7 @@ app.use("/assets", express.static(config.static.assets));
 app.use("/images", express.static(config.database.images));
 
 app.use("/", mainRouter);
+app.use("/users", userRouter);
 
 export function runServer(callBack: () => void): void {
   app.listen(config.port, callBack);

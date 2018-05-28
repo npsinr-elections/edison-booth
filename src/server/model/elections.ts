@@ -29,6 +29,7 @@ export function zipElection(
 
 class ElectionsDatastore {
   public db: Datastore;
+  private currentFile: string;
 
   public loadDB(): string {
     let dbPath: string;
@@ -39,13 +40,28 @@ class ElectionsDatastore {
     });
 
     if (!dbPath) {
+      this.db = undefined;
+      this.currentFile = undefined;
       return undefined;
     }
 
-    this.db = new Datastore({
-      filename: dbPath,
-      autoload: true
-    });
+    if (!this.db) {
+      this.db = new Datastore({
+        filename: dbPath,
+        autoload: true
+      });
+      this.currentFile = path.basename(dbPath);
+    } else {
+      if (path.basename(dbPath) === this.currentFile) {
+        return dbPath;
+      } else {
+        this.db = new Datastore({
+          filename: dbPath,
+          autoload: true
+        });
+        this.currentFile = path.basename(dbPath);
+      }
+    }
 
     return dbPath;
   }
@@ -64,8 +80,17 @@ class ElectionsDatastore {
     }));
   }
 
-  public async getElection(electionID: string): Promise<Election> {
-    const election = (
+  public async getElection(electionID?: string): Promise<Election> {
+    let election;
+    if (electionID === undefined) {
+      election = await this.getElections();
+      if (election.length === 1) {
+        return election[0];
+      } else {
+        return undefined;
+      }
+    }
+    election = (
       await this.getResourceByID(
         electionID, "election")) as Election;
     if (election === undefined) {

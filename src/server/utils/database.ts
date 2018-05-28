@@ -3,38 +3,9 @@
  * for read/write operations on these files.
  *
  */
-import fs = require("fs");
 import Datastore = require("nedb");
-import { promisify } from "util";
 
-import { config } from "../../config";
-import { createDummyData } from "../../dummy/initDummyData";
-import { db } from "../model/elections";
 import * as fileHandler from "./fileHandler";
-
-const mkdirPromise = promisify(fs.mkdir);
-
-/**
- * Checks whether the user data directory for the app
- * has been initialized. If not, then initializes it
- */
-export async function checkDataDir() {
-  const dirs = [
-    config.database.dir,
-    config.database.images,
-    config.database.exportTemp,
-  ];
-
-  for (const dir of dirs) {
-    if (!(fs.existsSync(dir))) {
-      await mkdirPromise(dir);
-    }
-  }
-
-  if (config.devMode && ((await db.getElections()).length === 0)) {
-    await createDummyData();
-  }
-}
 
 export function dbfind(datastore: Datastore, query: any): Promise<any[]> {
   return new Promise((resolve, reject) => {
@@ -103,10 +74,11 @@ export async function getData(
   let data;
   try {
     data = JSON.parse(await fileHandler.readFile(dataPath, cryptKey));
+    console.log("HERE");
+    console.log(data);
   } catch (error) {
     if (error.code === "ENOENT") {
-      await checkDataDir();
-      data = {};
+      return {};
     }
   }
   return data;

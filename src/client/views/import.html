@@ -7,7 +7,14 @@
       <h3>Import data</h3>
     </div>
     <div class="card-body">
-      <form class="import-form" action="/import" id="import-form" method="POST", enctype="multipart/form-data">
+        {% if alreadyImported %}
+        <p class="text-danger">
+          A file with name {{ alreadyImported }} has already been imported. Please import
+          data to <span class="text-bold"> start a new voting session only.</span> Any non exported
+          data will be lost! We recommend you <a href="/export">export</a> data first.
+        </p>
+        {% endif %}
+      <form class="import-form" action="/import" id="import-form" data-method="POST" enctype="multipart/form-data" data-redirect="/selectPolls">
         <div class="form">
           <label for="import-file-input">Upload exported data from edison-central</label>
           <input class="form-control-file" type="file" name="importedData" id="import-file-input" accept="application/zip">
@@ -27,4 +34,8 @@
 {% block stylesheets -%}
 <link rel="stylesheet" href="/assets/styles/forms.css">
 <link rel="stylesheet" href="/assets/styles/forms/import.css">
+{%- endblock %}
+
+{% block scripts -%}
+<script src="/assets/scripts/import-election-form.bundle.js"></script>
 {%- endblock %}
