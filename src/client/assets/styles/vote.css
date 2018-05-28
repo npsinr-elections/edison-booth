@@ -46,7 +46,8 @@ q {
 
 .thin-control {
   width: 10%;
-  background-color: rgba(150, 150, 150, 0.5);
+  opacity: 0.9;
+  background-color: rgba(100, 100, 100, 0.3);
 }
 
 #lock {
@@ -76,7 +77,8 @@ q {
   width: 80%;
   height: 100%;
   background-color: #FFF;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  overflow-y: scroll;
 }
 
 #submit-button {
@@ -102,4 +104,8 @@ q {
 
 .carousel-indicators li.active {
   background-color: rgba(200, 200, 200);
+}
+
+.card-title {
+  font-size: 1.25rem;
 }

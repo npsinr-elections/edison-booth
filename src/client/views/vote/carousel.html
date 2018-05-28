@@ -25,7 +25,7 @@
 
               <img src="{{ candidate.image }}" alt="" class="card-img-top">
               <div class="card-body">
-                <h5 class="card-title">{{ candidate.name }}</h4>
+                <span class="card-title">{{ candidate.name }}</span>
               </div>
             </div>
             {% endfor %}
@@ -33,10 +33,10 @@
         </div>
         <div class="carousel-caption d-none d-md-block">
           <div>
-            <span class="h3">{{ poll.name }} - </span>
-            <span class="h4">
+            <h3>{{ poll.name }}</h3>
+            <h4>
               <q>{{ poll.caption }}</q>
-            </span>
+            </h4>
           </div>
         </div>
       </div>
@@ -46,13 +46,15 @@
     </div>
 
   </div>
-  <a class="carousel-control-prev thin-control" id="left-arrow" href="#vote-carousel" role="button" data-slide="prev">
+  <span class="carousel-control-prev thin-control" id="left-arrow" href="#vote-carousel" role="button" data-slide="prev">
+    <span>Previous</span>
+    &nbsp;
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next thin-control" id="right-arrow" href="#vote-carousel" role="button" data-slide="next">
+  </span>
+  <span class="carousel-control-next thin-control" id="right-arrow" href="#vote-carousel" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+    &nbsp;
+    <span>Next</span>
+  </span>
 </div>
 </div>
