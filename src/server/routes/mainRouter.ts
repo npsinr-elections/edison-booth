@@ -73,8 +73,8 @@ router.post("/import", upload.single("importedData"),
 
     JSONResponse.Data(res, {});
     await promisify(fs.unlink)(req.file.path);
-  }
-  ));
+  })
+);
 
 router.get("/vote", checkIfImported, asyncMiddleware(async (req, res) => {
   if (!req.session.locked) {
@@ -131,7 +131,9 @@ router.get(
       pageTitle: "Select Polls",
       currentURL: req.url,
       formURL: "/setPolls",
-      election: election
+      election: election,
+      submitBtnText: "Begin voting",
+      submitBtnIcon: "fas fa-angle-double-right"
     });
 }));
 
@@ -141,7 +143,6 @@ router.get(
   lockMiddleware,
   asyncMiddleware(async (req, res) => {
     const pollIDs: string[] = req.query.pollIDs;
-    console.log(pollIDs);
     const election = await db.getElection();
     await Promise.all(election.polls.map(
       (pollData) => {
