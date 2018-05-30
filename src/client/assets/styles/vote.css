@@ -48,6 +48,11 @@ q {
   width: 10%;
   opacity: 0.9;
   background-color: rgba(100, 100, 100, 0.3);
+  cursor: pointer;
+}
+
+.thin-control:hover {
+  background-color: rgba(200, 200, 200, 0.6);
 }
 
 #lock {
@@ -100,6 +105,7 @@ q {
 
 .carousel-indicators li {
   background-color: rgba(200, 200, 200, 0.5);
+  cursor: pointer;
 }
 
 .carousel-indicators li.active {
