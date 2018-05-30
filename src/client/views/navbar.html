@@ -4,7 +4,7 @@
       {% for link, name, faIcon in [
         ["/", "Home", "fas fa-home"],
         ["/vote", "Vote", "fas fa-users"],
-        ["/export", "Export", "fas fa-download"]
+        ["/external/export", "Export", "fas fa-download"]
       ] %}
       <li class="nav-item">
         <a href="{{ link }}" class="nav-link {% if currentURL === link %}active{% endif %}">

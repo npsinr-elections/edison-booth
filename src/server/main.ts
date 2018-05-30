@@ -6,6 +6,7 @@ import morgan = require("morgan");
 import nunjucks = require("nunjucks");
 
 import { config } from "../config";
+import { router as externalRouter } from "./routes/externalRouter";
 import { router as mainRouter } from "./routes/mainRouter";
 import { router as userRouter } from "./routes/userRouter";
 
@@ -39,6 +40,7 @@ app.use("/images", express.static(config.database.images));
 
 app.use("/", mainRouter);
 app.use("/users", userRouter);
+app.use("/external", externalRouter);
 
 export function runServer(callBack: () => void): void {
   app.listen(config.port, callBack);

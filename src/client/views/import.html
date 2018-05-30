@@ -11,7 +11,7 @@
         <p class="text-danger">
           A file with name {{ alreadyImported }} has already been imported. Please import
           data to <span class="text-bold"> start a new voting session only.</span> Any non exported
-          data will be lost! We recommend you <a href="/export">export</a> data first.
+          data will be lost! We recommend you <a href="/external/export">export</a> data first.
         </p>
         {% endif %}
       <form class="import-form" action="/import" id="import-form" data-method="POST" enctype="multipart/form-data" data-redirect="/selectPolls">
@@ -25,6 +25,15 @@
             &nbsp;Submit
           </button>
         </div>
+      </form>
+      <br>
+      <h3>OR</h3>
+      <form action="/external/import/select" class="form">
+        <label for="ip-input">Enter IP address of edison-central</label>
+        <input class="form-control" id="ip-input" name="serverIP" type="text">
+          <button type="submit" class="btn btn-dark">
+          Import
+          </button>
       </form>
     </div>
   </div>

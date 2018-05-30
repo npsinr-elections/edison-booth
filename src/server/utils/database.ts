@@ -33,9 +33,12 @@ export function dbInsert<T>(datastore: Datastore, doc: T): Promise<T> {
   });
 }
 
-export function dbRemove(datastore: Datastore, query: any) {
+export function dbRemove(datastore: Datastore, query: any, options?: any) {
+  if (options === undefined) {
+    options = {};
+  }
   return new Promise((resolve, reject) => {
-    datastore.remove(query, (err: any, numRemoved: number) => {
+    datastore.remove(query, options, (err: any, numRemoved: number) => {
       if (err) {
         reject(err);
       } else {
@@ -74,8 +77,6 @@ export async function getData(
   let data;
   try {
     data = JSON.parse(await fileHandler.readFile(dataPath, cryptKey));
-    console.log("HERE");
-    console.log(data);
   } catch (error) {
     if (error.code === "ENOENT") {
       return {};

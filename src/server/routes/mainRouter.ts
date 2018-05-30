@@ -1,22 +1,23 @@
 import express = require("express");
-import fs = require("fs");
 import ip = require("ip");
 import multer = require("multer");
 import path = require("path");
-import rimraf = require("rimraf");
 import shortid = require("shortid");
-
-import { promisify } from "util";
 
 import { config } from "../../config";
 import { Candidate } from "../../shared/models";
-import { db } from "../model/elections";
-import { unzip, zipFile } from "../utils/zipAndUnzip";
+import { db, unzipElection } from "../model/elections";
 
 import { asyncMiddleware } from "../utils/asyncMiddleware";
 import { ERRORS, JSONResponse } from "../utils/JSONResponse";
 
 export const router = express.Router();
+
+router.use((_REQ, res, next) => {
+  res.setHeader("Cache-Control", "no-cache,no-store,max-age=0," +
+    "must-revalidate");
+  next();
+});
 
 function checkIfImported(
   _1: express.Request,
@@ -64,15 +65,8 @@ router.get("/", lockMiddleware, (req, res) => {
 
 router.post("/import", upload.single("importedData"),
   asyncMiddleware(async (req, res) => {
-    await Promise.all([
-      promisify(rimraf)(config.database.images),
-      promisify(rimraf)(path.join(config.database.dir, "*.db"))
-    ]);
-
-    unzip(req.file.path, config.database.dir);
-
+    await unzipElection(req.file.path);
     JSONResponse.Data(res, {});
-    await promisify(fs.unlink)(req.file.path);
   })
 );
 
@@ -107,13 +101,6 @@ router.post("/vote", checkIfImported, asyncMiddleware(async (req, res) => {
     return JSONResponse.Data(res, {});
   }
 
-}));
-
-router.get("/export", checkIfImported, asyncMiddleware(async (_REQ, res) => {
-  const zipPath = zipFile(db.loadDB(), config.database.temp);
-  res.download(zipPath, () => {
-    fs.unlinkSync(zipPath);
-  });
 }));
 
 router.get(

@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+
+{% block mainContent %}
+<div class="election-import-container col-lg-10 mx-auto">
+    <div class="election-import-container card">
+      <div class="card-header bg-dark"> 
+        <h3>Select elections to import from edison-central:</h3>
+      </div>
+      <div class="card-body">
+        <form id="poll-select-form" action="{{ formURL }}" data-method="GET">
+            <input type="hidden" name="serverURL" value="{{ serverURL }}">
+          <div class="form-group">
+            {% for election in elections -%}
+            <div class="form-check">
+              <input name= "electionID" class="form-check-input" type="radio" value="{{ election.id }}" id="check{{ election.id }}">
+              <label class="form-check-label" for="check{{ poll.id }}">{{ election.name }}</label>
+            </div>
+            {%- endfor %}
+          </div>
+          <button id="exportPollsBtn" type="submit" class="btn btn-success">
+              <i class="{{ submitBtnIcon }}"></i>
+              {{ submitBtnText }}
+          </button>
+        </form>
+      </div>
+    </div>
+</div>
+{%- endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="/assets/styles/forms.css">
+<link rel="stylesheet" href="/assets/styles/forms/poll-select.css">
+{%- endblock %}
+
+{% block scripts %}
+<script src="/assets/scripts/poll-select-form.bundle.js"></script>
+{%- endblock %}

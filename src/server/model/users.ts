@@ -17,6 +17,5 @@ export interface UserData {
  * @returns {database.UserData}
  */
 export async function getUserData(): Promise<UserData> {
-  console.log(config.database.users);
   return await getData(config.database.users);
 }

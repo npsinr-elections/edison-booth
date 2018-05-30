@@ -9,6 +9,7 @@ import { promisify } from "util";
 import { config } from "../../config";
 import { Candidate, Election, Image, Poll } from "../../shared/models";
 import { dbfind, dbInsert, dbRemove, dbUpdate } from "../utils/database";
+import { unzip } from "../utils/zipAndUnzip";
 
 const copyFilePromise = promisify(copyFile);
 const mkdirPromise = promisify(mkdir);
@@ -27,6 +28,17 @@ export function zipElection(
   zipper.writeZip(destination);
 }
 
+export async function unzipElection(zipPath: string) {
+  await Promise.all([
+    promisify(rimraf)(config.database.images),
+    promisify(rimraf)(path.join(config.database.dir, "*.db"))
+  ]);
+
+  unzip(zipPath, config.database.dir);
+
+  await unlinkPromise(zipPath);
+
+}
 class ElectionsDatastore {
   public db: Datastore;
   private currentFile: string;
